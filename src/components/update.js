@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import {
   Button,
   Input,
@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 
 export default function Update() {
+  const navigate = useNavigate()
   const [name, setName] = useState(null);
   const [designation, setDesignation] = useState(null);
   const [city, setCity] = useState(null);
@@ -24,6 +25,7 @@ export default function Update() {
       designation,
       city,
     });
+    navigate('/read')
   };
   useEffect(() => {
    setName(localStorage.getItem('name'));
@@ -70,11 +72,11 @@ export default function Update() {
             type="text"
           />
         </FormGroup>
-        <Link to="/read">
+       
         <Button color="primary" type="submit" onClick={sendDataToApi}>
           Update
         </Button>
-        </Link>
+        
       </Form>
     </div>
   );

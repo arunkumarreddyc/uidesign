@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Alert } from "reactstrap";
 
 export default function Read() {
   const [apiData, setApiData] = useState([]);
@@ -11,7 +12,7 @@ export default function Read() {
         // console.log(getData.data);
         setApiData(getData.data);
       });
-  }, []);
+  }, [apiData]);
 
   const setID = (data) => {
     //   console.log(id)
@@ -38,9 +39,19 @@ export default function Read() {
   };
   return (
     <div>
-      <table className="table table-primary p-4 m-4 border border-info rounded-3 text-dark">
+      <table className="table table-primary  p-4 m-4 border border-info rounded-3 text-dark">
         <thead>
           <tr>
+            <th colspan="4" className="bg bg-warning">
+              Users Details
+            </th>
+            <Link to="/create">
+              <th colspan="5" className=" ">
+                add user
+              </th>
+            </Link>
+          </tr>
+          <tr className="text-light table-dark">
             <th>Name</th>
             <th>Designation</th>
             <th>City</th>
@@ -66,14 +77,12 @@ export default function Read() {
                 </Link>
               </td>
               <td>
-               
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => onDelete(data.id)}
-                  >
-                    Delete
-                  </button>
-                
+                <button
+                  className="btn btn-danger"
+                  onClick={() => onDelete(data.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

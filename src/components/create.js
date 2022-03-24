@@ -1,24 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Input, Form, FormGroup, Label } from "reactstrap";
 import axios from "axios";
 
 export default function Create() {
-  const [name, setName] = useState(null);
-  const [designation, setDesignation] = useState(null);
-  const [city, setCity] = useState(null);
+  const [name, setName] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [city, setCity] = useState("");
+  const navigate = useNavigate();
 
   const sendDataToApi = (e) => {
     e.preventDefault();
-    axios.post(`https://6231fb9159070d9273408dd2.mockapi.io/crud1`, {
-      name,
-      designation,
-      city,
-    });
+    if (name !== "" && designation !== "" && city !== "") {
+      axios.post(`https://6231fb9159070d9273408dd2.mockapi.io/crud1`, {
+        name,
+        designation,
+        city,
+      });
+      navigate("/read");
+    } else {
+      alert("One or more fields are missing");
+    }
   };
   return (
     <div>
-      <Form className="border-light p-4 rounded bg-warning" >
+      <Form className="border-light p-4 rounded bg-warning">
         <FormGroup>
           <Label for="exampleName">Name</Label>
           <Input
@@ -49,11 +55,10 @@ export default function Create() {
             type="text"
           />
         </FormGroup>
-        <Link to="./read">
-          <Button color="primary" type="submit" onClick={sendDataToApi}>
-            Submit
-          </Button>
-        </Link>
+
+        <Button color="primary" onClick={sendDataToApi}>
+          Submit
+        </Button>
       </Form>
     </div>
   );
