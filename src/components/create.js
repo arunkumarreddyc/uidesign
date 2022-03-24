@@ -17,7 +17,7 @@ export default function Create() {
         designation,
         city,
       });
-      navigate("/read");
+      navigate("/");
     } else {
       alert("One or more fields are missing");
     }
