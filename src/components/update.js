@@ -25,7 +25,7 @@ export default function Update() {
       designation,
       city,
     });
-    navigate('/read')
+    navigate('/')
   };
   useEffect(() => {
    setName(localStorage.getItem('name'));
